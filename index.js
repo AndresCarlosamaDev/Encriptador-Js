@@ -8,19 +8,10 @@ var boton_copiar = document.querySelector('#btn3');
 
 var valor_ingresado = valor;
 
-function copiado(text) {
-  // Crea un elemento de entrada de texto temporal
-  var tempInput = document.createElement("input");
-  // Asigna el texto al elemento de entrada temporal
-  tempInput.value = text;
-  // Agrega el elemento de entrada temporal al DOM
-  document.body.appendChild(tempInput);
-  // Selecciona el contenido del elemento de entrada
-  tempInput.select();
-  // Ejecuta el comando de copiar en el portapapeles
-  document.execCommand("copy");
-  // Elimina el elemento de entrada temporal del DOM
-  document.body.removeChild(tempInput);
+function copiado() {
+  navigator.clipboard.writeText(res_parrafo.textContent);
+  boton_copiar.textContent = 'Copiado';
+
 }
 
 function charEspecial() {
@@ -91,8 +82,8 @@ function encritar() {
   }
   if (res_parrafo) {
     imagen.setAttribute('class', 'no_img')
-    var txt_copiar = res_parrafo.innerHTML = valor_nuevo.toLowerCase();
-    boton_copiar.onclick = copiado(txt_copiar);
+    res_parrafo.innerHTML = valor_nuevo.toLowerCase();
+    boton_copiar.onclick = copiado();
   } else {
     imagen.setAttribute('class', '')
   }
@@ -174,6 +165,7 @@ function desencritar() {
     if (res_parrafo) {
       imagen.setAttribute('class', 'no_img')
       res_parrafo.innerHTML = valor_nuevo.toLowerCase();
+      boton_copiar.onclick = copiado();
     } else {
       imagen.setAttribute('class', '')
     }
@@ -182,4 +174,4 @@ function desencritar() {
 
 boton_encriptar.onclick = encritar;
 boton_desencriptar.onclick = desencritar;
-//boton_copiar.onclick = copiado(txt_copiar);
+//boton_copiar.onclick = copiado();
